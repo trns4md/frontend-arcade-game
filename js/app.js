@@ -1,7 +1,7 @@
 // Enemies our player must avoid
 class articles {
     constructor() {
-        this.sprite = 'image/';
+        this.sprite = 'images/';
         this.x = 2;
         this.y = 5;
     }
@@ -20,7 +20,7 @@ class opponent extends articles {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+opponent.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -37,18 +37,21 @@ Enemy.prototype.update = function(dt) {
 class competitor extends articles {
     constructor() {
         super();
-        this.sprite += 'char-pink-girl.png';
+        this.sprite += 'char-cat-girl.png';
     }
 }
 const player = new competitor();
-player.render();
+competitor.prototype.update = function(dt) {
+
+};
+
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-const allEnemies = new opponent();
-
-allEnemies = [...Array(3)];
+const allEnemies = [...Array(3)].map((_, i) => new opponent(0, i + 1));
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
