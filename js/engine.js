@@ -82,7 +82,7 @@ var Engine = (function(global) {
         updateEntities(dt);
         checkCollision();
     }
-
+    //Added functionality for collision and reset
     function checkCollision() {
         allEnemies.forEach(opponent => {
             if (opponent.checkCollision(player) || player.checkCollision(opponent)) {
