@@ -35,7 +35,7 @@ class opponent extends articles {
         if (this.inBoundaryX) {
             this.x = -1;
         } else {
-            this.x += dt;
+            this.x += dt * (2 * Math.floor(Math.random(this.speed) * 5));
         }
     }
 }
@@ -81,11 +81,8 @@ class competitor extends articles {
     }
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Now instantiate the objects.
 const player = new competitor();
-//competitor.prototype.update = function(dt) {};
 const allEnemies = [...Array(3)].map((_, i) => new opponent(0, i + 1));
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
