@@ -77,11 +77,20 @@ var Engine = (function(global) {
      * functionality this way (you could just implement collision detection
      * on the entities themselves within your app.js file).
      */
+
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
+    function checkCollisions() {
+        allEnemies.forEach(opponent => {
+            if (opponent.checkCollisions(competitor) || competitor.checkCollisions(opponent)) {
+                this.y = 5;
+                this.x = 2;
+            }
+        });
+    }
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -90,8 +99,8 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        allEnemies.forEach(function(enemy) {
-            enemy.update(dt);
+        allEnemies.forEach(function(opponent) {
+            opponent.update(dt);
         });
         player.update();
     }
