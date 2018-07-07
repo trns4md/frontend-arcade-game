@@ -49,6 +49,19 @@ class competitor extends articles {
         this.moving = false;
         this.win = false;
     }
+    update(dt) {
+        super.update();
+        if (this.inBoundaryY && !this.moving && !this.win) {
+            alert("Congratulations!! You Win!!");
+            player.y = 5;
+            player.x = 2;
+        }
+    }
+
+    render() {
+        super.render();
+        this.moving = false;
+    }
     handleInput(input) {
         switch (input) {
             case 'left':
@@ -64,6 +77,7 @@ class competitor extends articles {
                 this.y = this.y < 5 ? this.y + 1 : this.y;
 
         }
+        this.moving = true;
     }
 }
 
@@ -71,7 +85,7 @@ class competitor extends articles {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 const player = new competitor();
-competitor.prototype.update = function(dt) {};
+//competitor.prototype.update = function(dt) {};
 const allEnemies = [...Array(3)].map((_, i) => new opponent(0, i + 1));
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
