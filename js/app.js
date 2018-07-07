@@ -1,4 +1,4 @@
-// Enemies our player must avoid
+// Properties that both the Player and Enemy share
 class articles {
     constructor() {
         this.sprite = 'images/';
@@ -13,20 +13,22 @@ class articles {
         ctx.drawImage(Resources.get(this.sprite), this.x * 101, this.y * 83);
     }
     checkCollision(competitorOrOpponent) {
-        if (this.y === competitorOrOpponent, y) {
-            if (this.x >= competitorOrOpponent.x - 0.5 && this.x <= competitorOrOpponent.x + 0.5);
-            return true;
-        } else {
-            return false;
+        if (this.y === competitorOrOpponent.y) {
+            if (this.x >= competitorOrOpponent.x - 0.5 && this.x <= competitorOrOpponent.x + 0.5) {
+                return true;
+            }
+
         }
     }
 }
+//Enemy Class
 class opponent extends articles {
-    constructor(x, y) {
+    constructor(x, y, speed) {
         super();
         this.sprite += 'enemy-bug.png';
         this.x = x;
         this.y = y;
+        this.speed = speed;
     }
     update(dt) {
         super.update();
@@ -38,26 +40,14 @@ class opponent extends articles {
     }
 }
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-//opponent.prototype.update = function(dt) {
-// You should multiply any movement by the dt parameter
-// which will ensure the game runs at the same speed for
-// all computers.
-//};
 
-// Draw the enemy on the screen, required method for game
-/*Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};*/
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// Player class
 class competitor extends articles {
     constructor() {
         super();
         this.sprite += 'char-cat-girl.png';
+        this.moving = false;
+        this.win = false;
     }
     handleInput(input) {
         switch (input) {
@@ -76,17 +66,12 @@ class competitor extends articles {
         }
     }
 }
-const player = new competitor();
-competitor.prototype.update = function(dt) {
-
-};
-
-
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
+const player = new competitor();
+competitor.prototype.update = function(dt) {};
 const allEnemies = [...Array(3)].map((_, i) => new opponent(0, i + 1));
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

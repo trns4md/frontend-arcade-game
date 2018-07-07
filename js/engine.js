@@ -80,14 +80,14 @@ var Engine = (function(global) {
 
     function update(dt) {
         updateEntities(dt);
-        checkCollisions();
+        checkCollision();
     }
 
-    function checkCollisions() {
+    function checkCollision() {
         allEnemies.forEach(opponent => {
-            if (opponent.checkCollisions(competitor) || competitor.checkCollisions(opponent)) {
-                this.y = 5;
-                this.x = 2;
+            if (opponent.checkCollision(player) || player.checkCollision(opponent)) {
+                player.y = 5;
+                player.x = 2;
             }
         });
     }
